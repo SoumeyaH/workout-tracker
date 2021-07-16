@@ -1,14 +1,17 @@
 const mongoose = require("mongoose");
+
+const { DB_URL, MONGOOSE_OPTIONS } = require("../config");
 const db = require("../models");
 
-console.log("global db", db);
-console.log("global db", db.Workout);
+// const connection = async () => {
+//   await mongoose.connect("mongodb://localhost/workout", {
+//     useNewUrlParser: true,
+//     useFindAndModify: false,
+//     useUnifiedTopology: true,
+//   });
+// };
 
-mongoose.connect("mongodb://localhost/workout", {
-  useNewUrlParser: true,
-  useFindAndModify: false,
-  useUnifiedTopology: true,
-});
+// connection();
 
 const workoutSeed = [
   {
@@ -143,6 +146,11 @@ const workoutSeed = [
 //   });
 
 const init = async () => {
+  await mongoose.connect("mongodb://localhost/workout", {
+    useNewUrlParser: true,
+    useFindAndModify: false,
+    useUnifiedTopology: true,
+  });
   console.log("init function");
   try {
     const workouts = await db.Workout.insertMany(workoutSeed);
