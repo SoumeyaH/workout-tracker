@@ -1,7 +1,7 @@
 const express = require("express");
 
 const { connect } = require("./db");
-// const routes = require("./routes");
+const routes = require("./routes");
 
 const PORT = process.env.PORT || 4000;
 
@@ -12,7 +12,7 @@ connect();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// app.use(routes);
+app.use(routes);
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
