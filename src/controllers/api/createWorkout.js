@@ -1,7 +1,12 @@
 const { Workout } = require("../../models");
 
 const createWorkout = async (req, res) => {
-  const { body: workout } = req;
+  const { body } = req;
+
+  const workout = {
+    day: new Date(new Date().setDate(new Date().getDate() - 9)),
+    ...body,
+  };
 
   try {
     const newWorkout = await Workout.create(workout);
