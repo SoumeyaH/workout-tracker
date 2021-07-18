@@ -1,8 +1,17 @@
 const { Workout } = require("../../models");
 
 const updateWorkout = async (req, res) => {
-  console.log("add", req.body);
-  res.json({ message: "updateWorkout function" });
+  const { id } = req.params;
+  const { body } = req;
+
+  try {
+    const updatedWorkout = await Workout.findByIdAndUpdate(id, {
+      $push: { exercises: body },
+    });
+    res.status(200).json(updatedWorkout);
+  } catch (err) {
+    res.status(500).json(err);
+  }
 };
 
 module.exports = updateWorkout;
