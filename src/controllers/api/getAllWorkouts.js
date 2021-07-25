@@ -12,9 +12,9 @@ const getAllWorkouts = async (req, res) => {
         },
       },
     ]);
-    res.json(workouts);
-  } catch (error) {
-    res.json(error);
+    return res.status(200).json(workouts);
+  } catch (err) {
+    return res.status(500).json(err);
   }
 };
 
